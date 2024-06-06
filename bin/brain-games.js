@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { askAndGreetUser } from '../src/cli.js';
+import askAndGreetUser from '../src/cli.js';
 
 console.log('Welcome to the Brain Games!');
 askAndGreetUser();
