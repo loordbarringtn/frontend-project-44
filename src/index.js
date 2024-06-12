@@ -1,6 +1,7 @@
 import readlineSync from 'readline-sync';
 import determineEvenOrNot from './games/brainEvenFunction.js';
 import getRandomOperator from './games/brainCalcFunction.js';
+import getGCD from './games/brainGCDFunction.js';
 
 const askAndGreetUser = () => {
   console.log('Welcome to the Brain game!');
@@ -28,6 +29,9 @@ const runGame = (gameName) => {
       break;
     case 'brain-even':
       instructions = 'Answer "yes" if the number is even, otherwise answer "no"';
+      break;
+    case 'brain-gcd':
+      instructions = 'Find the greatest common divisor of given numbers.';
       break;
     default:
       throw new Error(`Unknown game: ${gameName}`);
@@ -60,6 +64,12 @@ const runGame = (gameName) => {
       case 'brain-even':
         randomNumber = getRandomNumber();
         correctAnswer = determineEvenOrNot(randomNumber);
+        break;
+      case 'brain-gcd':
+        randomNumber1 = getRandomNumber();
+        randomNumber2 = getRandomNumber();
+        randomNumber = `${randomNumber1} ${randomNumber2}`;
+        correctAnswer = String(getGCD(randomNumber1, randomNumber2));
         break;
       default:
         throw new Error(`Unknown game: ${gameName}`);
