@@ -1,7 +1,8 @@
 import readlineSync from 'readline-sync';
-import determineEvenOrNot from './games/brainEvenFunction.js';
-import getRandomOperator from './games/brainCalcFunction.js';
-import getGCD from './games/brainGCDFunction.js';
+import determineEvenOrNot from './games/brainEvenLogic.js';
+import getRandomOperator from './games/brainCalcLogic.js';
+import getGCD from './games/brainGCDLogic.js';
+import makeArithmeticProgression from './games/brainProgressionLogic.js';
 
 const askAndGreetUser = () => {
   console.log('Welcome to the Brain game!');
@@ -9,8 +10,7 @@ const askAndGreetUser = () => {
   console.log(`Hello, ${userName}!`);
   return userName;
 };
-
-const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
+const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const runGame = (gameName) => {
   let instructions;
@@ -20,6 +20,11 @@ const runGame = (gameName) => {
   let randomNumber2 = 0;
   let correctAnswer = '';
   let operator = '';
+  let step = 0;
+  let membersQuantity = 0;
+  let progressionArr = [];
+  let hiddenIndex = 0;
+  let arrayWithHiddenElements = [];
 
   const name = askAndGreetUser();
 
@@ -33,6 +38,9 @@ const runGame = (gameName) => {
     case 'brain-gcd':
       instructions = 'Find the greatest common divisor of given numbers.';
       break;
+    case 'brain-progression':
+      instructions = 'What number is missing in the progression?';
+      break;
     default:
       throw new Error(`Unknown game: ${gameName}`);
   }
@@ -42,8 +50,8 @@ const runGame = (gameName) => {
   while (attemptsNumber > 0) {
     switch (gameName) {
       case 'brain-calc':
-        randomNumber1 = getRandomNumber();
-        randomNumber2 = getRandomNumber();
+        randomNumber1 = getRandomNumber(100);
+        randomNumber2 = getRandomNumber(100);
         operator = getRandomOperator();
         randomNumber = `${randomNumber1} ${operator} ${randomNumber2}`;
 
@@ -62,14 +70,24 @@ const runGame = (gameName) => {
         }
         break;
       case 'brain-even':
-        randomNumber = getRandomNumber();
+        randomNumber = getRandomNumber(100);
         correctAnswer = determineEvenOrNot(randomNumber);
         break;
       case 'brain-gcd':
-        randomNumber1 = getRandomNumber();
-        randomNumber2 = getRandomNumber();
+        randomNumber1 = getRandomNumber(100);
+        randomNumber2 = getRandomNumber(100);
         randomNumber = `${randomNumber1} ${randomNumber2}`;
         correctAnswer = String(getGCD(randomNumber1, randomNumber2));
+        break;
+      case 'brain-progression':
+        step = getRandomNumber(3);
+        membersQuantity = getRandomNumber(10, 5);
+        progressionArr = makeArithmeticProgression(step, membersQuantity);
+        hiddenIndex = getRandomNumber(membersQuantity - 1);
+        arrayWithHiddenElements = [...progressionArr];
+        arrayWithHiddenElements[hiddenIndex] = '..';
+        randomNumber = arrayWithHiddenElements.join(' ');
+        correctAnswer = progressionArr[hiddenIndex];
         break;
       default:
         throw new Error(`Unknown game: ${gameName}`);
@@ -78,7 +96,7 @@ const runGame = (gameName) => {
     console.log(`Question: ${randomNumber}`);
     const answer = String(readlineSync.question('Your answer: '));
 
-    if (answer === correctAnswer) {
+    if (parseInt(answer, 10) === correctAnswer) {
       console.log('Correct!');
       // eslint-disable-next-line no-plusplus
       attemptsNumber--;
