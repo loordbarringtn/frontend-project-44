@@ -1,20 +1,30 @@
 import readlineSync from 'readline-sync';
+import askAndGreetUser from './cli.js';
 import determineEvenOrNot from './games/brainEvenLogic.js';
 import getRandomOperator from './games/brainCalcLogic.js';
 import getGCD from './games/brainGCDLogic.js';
 import makeArithmeticProgression from './games/brainProgressionLogic.js';
 import isNumberPrime from './games/brainPrimeLogic.js';
-
-const askAndGreetUser = () => {
-  console.log('Welcome to the Brain game!');
-  const userName = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${userName}!`);
-  return userName;
-};
 const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+const getGameInstructions = (gameName) => {
+  switch (gameName) {
+    case 'brain-calc':
+      return 'What is the result of the expression?';
+    case 'brain-even':
+      return 'Answer "yes" if the number is even, otherwise answer "no"';
+    case 'brain-gcd':
+      return 'Find the greatest common divisor of given numbers.';
+    case 'brain-progression':
+      return 'What number is missing in the progression?';
+    case 'brain-prime':
+      return 'Answer "yes" if given number is prime. Otherwise answer "no"';
+    default:
+      throw new Error(`Unknown game: ${gameName}`);
+  }
+};
+
 const runGame = (gameName) => {
-  let instructions;
   let attemptsNumber = 3;
   let question = 0;
   let randomNumber1 = 0;
@@ -26,29 +36,9 @@ const runGame = (gameName) => {
   let progressionArr = [];
   let hiddenIndex = 0;
   let arrayWithHiddenElements = [];
+  let instructions = getGameInstructions(gameName);
 
   const name = askAndGreetUser();
-
-  switch (gameName) {
-    case 'brain-calc':
-      instructions = 'What is the result of the expression?';
-      break;
-    case 'brain-even':
-      instructions = 'Answer "yes" if the number is even, otherwise answer "no"';
-      break;
-    case 'brain-gcd':
-      instructions = 'Find the greatest common divisor of given numbers.';
-      break;
-    case 'brain-progression':
-      instructions = 'What number is missing in the progression?';
-      break;
-    case 'brain-prime':
-      instructions = 'Answer "yes" if given number is prime. Otherwise answer "no"';
-      break;
-    default:
-      throw new Error(`Unknown game: ${gameName}`);
-  }
-
   console.log(instructions);
 
   while (attemptsNumber > 0) {
