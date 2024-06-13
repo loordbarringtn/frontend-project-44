@@ -3,6 +3,7 @@ import determineEvenOrNot from './games/brainEvenLogic.js';
 import getRandomOperator from './games/brainCalcLogic.js';
 import getGCD from './games/brainGCDLogic.js';
 import makeArithmeticProgression from './games/brainProgressionLogic.js';
+import isNumberPrime from './games/brainPrimeLogic.js';
 
 const askAndGreetUser = () => {
   console.log('Welcome to the Brain game!');
@@ -15,7 +16,7 @@ const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min 
 const runGame = (gameName) => {
   let instructions;
   let attemptsNumber = 3;
-  let randomNumber = 0;
+  let question = 0;
   let randomNumber1 = 0;
   let randomNumber2 = 0;
   let correctAnswer = '';
@@ -41,6 +42,9 @@ const runGame = (gameName) => {
     case 'brain-progression':
       instructions = 'What number is missing in the progression?';
       break;
+    case 'brain-prime':
+      instructions = 'Answer "yes" if given number is prime. Otherwise answer "no"';
+      break;
     default:
       throw new Error(`Unknown game: ${gameName}`);
   }
@@ -53,7 +57,7 @@ const runGame = (gameName) => {
         randomNumber1 = getRandomNumber(100);
         randomNumber2 = getRandomNumber(100);
         operator = getRandomOperator();
-        randomNumber = `${randomNumber1} ${operator} ${randomNumber2}`;
+        question = `${randomNumber1} ${operator} ${randomNumber2}`;
 
         switch (operator) {
           case '+':
@@ -70,13 +74,13 @@ const runGame = (gameName) => {
         }
         break;
       case 'brain-even':
-        randomNumber = getRandomNumber(100);
-        correctAnswer = determineEvenOrNot(randomNumber);
+        question = getRandomNumber(100);
+        correctAnswer = determineEvenOrNot(question);
         break;
       case 'brain-gcd':
         randomNumber1 = getRandomNumber(100);
         randomNumber2 = getRandomNumber(100);
-        randomNumber = `${randomNumber1} ${randomNumber2}`;
+        question = `${randomNumber1} ${randomNumber2}`;
         correctAnswer = String(getGCD(randomNumber1, randomNumber2));
         break;
       case 'brain-progression':
@@ -86,17 +90,21 @@ const runGame = (gameName) => {
         hiddenIndex = getRandomNumber(membersQuantity - 1);
         arrayWithHiddenElements = [...progressionArr];
         arrayWithHiddenElements[hiddenIndex] = '..';
-        randomNumber = arrayWithHiddenElements.join(' ');
-        correctAnswer = progressionArr[hiddenIndex];
+        question = arrayWithHiddenElements.join(' ');
+        correctAnswer = String(progressionArr[hiddenIndex]);
+        break;
+      case 'brain-prime':
+        question = getRandomNumber(100);
+        correctAnswer = isNumberPrime(question);
         break;
       default:
         throw new Error(`Unknown game: ${gameName}`);
     }
 
-    console.log(`Question: ${randomNumber}`);
+    console.log(`Question: ${question}`);
     const answer = String(readlineSync.question('Your answer: '));
 
-    if (parseInt(answer, 10) === correctAnswer) {
+    if (answer === correctAnswer) {
       console.log('Correct!');
       // eslint-disable-next-line no-plusplus
       attemptsNumber--;
