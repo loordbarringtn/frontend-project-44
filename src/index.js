@@ -5,6 +5,7 @@ import getRandomOperator from './games/brainCalcLogic.js';
 import getGCD from './games/brainGCDLogic.js';
 import makeArithmeticProgression from './games/brainProgressionLogic.js';
 import isNumberPrime from './games/brainPrimeLogic.js';
+
 const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const getGameInstructions = (gameName) => {
@@ -24,9 +25,9 @@ const getGameInstructions = (gameName) => {
   }
 };
 
-const runGame = (gameName) => {
-  let attemptsNumber = 3;
+const generateQuestionAndAnswer = (gameName) => {
   let question = 0;
+  let number = 0;
   let randomNumber1 = 0;
   let randomNumber2 = 0;
   let correctAnswer = '';
@@ -36,60 +37,70 @@ const runGame = (gameName) => {
   let progressionArr = [];
   let hiddenIndex = 0;
   let arrayWithHiddenElements = [];
-  let instructions = getGameInstructions(gameName);
 
+  switch (gameName) {
+    case 'brain-calc':
+      randomNumber1 = getRandomNumber(100);
+      randomNumber2 = getRandomNumber(100);
+      operator = getRandomOperator();
+      question = `${randomNumber1} ${operator} ${randomNumber2}`;
+
+      switch (operator) {
+        case '+':
+          correctAnswer = String(randomNumber1 + randomNumber2);
+          break;
+        case '-':
+          correctAnswer = String(randomNumber1 - randomNumber2);
+          break;
+        case '*':
+          correctAnswer = String(randomNumber1 * randomNumber2);
+          break;
+        default:
+          throw new Error(`Unknown operator: ${operator}`);
+      }
+      break;
+    case 'brain-even':
+      number = getRandomNumber(100);
+      question = number;
+      correctAnswer = determineEvenOrNot(number);
+      break;
+    case 'brain-gcd':
+      randomNumber1 = getRandomNumber(100);
+      randomNumber2 = getRandomNumber(100);
+      question = `${randomNumber1} ${randomNumber2}`;
+      correctAnswer = String(getGCD(randomNumber1, randomNumber2));
+      break;
+    case 'brain-progression':
+      step = getRandomNumber(3);
+      membersQuantity = getRandomNumber(10, 5);
+      progressionArr = makeArithmeticProgression(step, membersQuantity);
+      hiddenIndex = getRandomNumber(membersQuantity - 1);
+      arrayWithHiddenElements = [...progressionArr];
+      arrayWithHiddenElements[hiddenIndex] = '..';
+      question = arrayWithHiddenElements.join(' ');
+      correctAnswer = String(progressionArr[hiddenIndex]);
+      break;
+    case 'brain-prime':
+      question = getRandomNumber(100);
+      correctAnswer = isNumberPrime(question);
+      break;
+    default:
+      throw new Error(`Unknown game: ${gameName}`);
+  }
+
+  return [question, correctAnswer];
+};
+
+const runGame = (gameName) => {
+  let attemptsNumber = 3;
+
+  const instructions = getGameInstructions(gameName);
   const name = askAndGreetUser();
+
   console.log(instructions);
 
   while (attemptsNumber > 0) {
-    switch (gameName) {
-      case 'brain-calc':
-        randomNumber1 = getRandomNumber(100);
-        randomNumber2 = getRandomNumber(100);
-        operator = getRandomOperator();
-        question = `${randomNumber1} ${operator} ${randomNumber2}`;
-
-        switch (operator) {
-          case '+':
-            correctAnswer = String(randomNumber1 + randomNumber2);
-            break;
-          case '-':
-            correctAnswer = String(randomNumber1 - randomNumber2);
-            break;
-          case '*':
-            correctAnswer = String(randomNumber1 * randomNumber2);
-            break;
-          default:
-            throw new Error(`Unknown operator: ${operator}`);
-        }
-        break;
-      case 'brain-even':
-        question = getRandomNumber(100);
-        correctAnswer = determineEvenOrNot(question);
-        break;
-      case 'brain-gcd':
-        randomNumber1 = getRandomNumber(100);
-        randomNumber2 = getRandomNumber(100);
-        question = `${randomNumber1} ${randomNumber2}`;
-        correctAnswer = String(getGCD(randomNumber1, randomNumber2));
-        break;
-      case 'brain-progression':
-        step = getRandomNumber(3);
-        membersQuantity = getRandomNumber(10, 5);
-        progressionArr = makeArithmeticProgression(step, membersQuantity);
-        hiddenIndex = getRandomNumber(membersQuantity - 1);
-        arrayWithHiddenElements = [...progressionArr];
-        arrayWithHiddenElements[hiddenIndex] = '..';
-        question = arrayWithHiddenElements.join(' ');
-        correctAnswer = String(progressionArr[hiddenIndex]);
-        break;
-      case 'brain-prime':
-        question = getRandomNumber(100);
-        correctAnswer = isNumberPrime(question);
-        break;
-      default:
-        throw new Error(`Unknown game: ${gameName}`);
-    }
+    const [question, correctAnswer] = generateQuestionAndAnswer(gameName);
 
     console.log(`Question: ${question}`);
     const answer = String(readlineSync.question('Your answer: '));
