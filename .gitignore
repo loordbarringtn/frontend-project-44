@@ -1,6 +1,3 @@
 node_modules
 .DS_Store
-.idea/.gitignore
-.idea/frontend-project-44.iml
-.idea/modules.xml
-.idea/vcs.xml
+.idea
