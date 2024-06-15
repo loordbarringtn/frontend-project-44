@@ -33,21 +33,27 @@ brain-even
 [![asciicast](https://asciinema.org/a/TqFVmHETjAdmatL9eB8NfFQOc.svg)](https://asciinema.org/a/TqFVmHETjAdmatL9eB8NfFQOc)
 
 ### Игра "Калькулятор"
-Вам показывается случайное математическое выражение, например 35 + 16, которое нужно вычислить и записать правильный ответ.
+Вам показывается случайное математическое выражение, например 98 + 37, которое нужно вычислить и записать правильный ответ.
 Запуск игры:
 ```
 brain-calc
 ```
 [![asciicast](https://asciinema.org/a/0YVy8rjUZ8EzjODBdKagqalnW.svg)](https://asciinema.org/a/0YVy8rjUZ8EzjODBdKagqalnW)
 
-<script src="https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr.js" id="asciicast-lJfuE941zdcQ3uecdnDhvL3yr" async="true"></script>
+### Игра "Наибольший общий делитель"
+Вам показывается два случайных числа, например, 19 и 11. Нужно вычислить и ввести наибольший общий делитель этих чисел.
+Запуск игры:
+```
+brain-gcd
+```
+[![asciicast](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr.svg)](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr)
+
 [![asciicast](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627.svg)](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627)
 
 [![asciicast](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip.svg)](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip)
 
 ### Built With:
 ![Javascript][Javascript]
-
 
 [contributors-shield]: https://img.shields.io/github/contributors/loordbarringtn/frontend-project-44.svg?style=for-the-badge
 [contributors-url]: https://github.com/loordbarringtn/frontend-project-44/graphs/contributors
