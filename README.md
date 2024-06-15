@@ -40,8 +40,7 @@ brain-calc
 ```
 [![asciicast](https://asciinema.org/a/0YVy8rjUZ8EzjODBdKagqalnW.svg)](https://asciinema.org/a/0YVy8rjUZ8EzjODBdKagqalnW)
 
-[![asciicast](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr.svg)](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr)
-
+<script src="https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr.js" id="asciicast-lJfuE941zdcQ3uecdnDhvL3yr" async="true"></script>
 [![asciicast](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627.svg)](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627)
 
 [![asciicast](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip.svg)](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip)
