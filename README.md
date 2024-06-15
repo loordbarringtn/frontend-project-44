@@ -48,8 +48,20 @@ brain-gcd
 ```
 [![asciicast](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr.svg)](https://asciinema.org/a/lJfuE941zdcQ3uecdnDhvL3yr)
 
+### Игра "Арифметическая прогрессия"
+Вам показывается ряд чисел, образующих арифмитическую прогрессию. Необходимо определить неизвестное число.
+Запуск игры:
+```
+brain-progression
+```
 [![asciicast](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627.svg)](https://asciinema.org/a/J95e7BZVycURLyYhObgozd627)
 
+### Игра "Простое ли число?"
+Вам показывается случайное число. Вам необходимо ответить yes если число простое или no если нет.
+Запуск игры:
+```
+brain-prime
+```
 [![asciicast](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip.svg)](https://asciinema.org/a/WhNnrdwhmiselw6yxkyBIo5ip)
 
 ### Built With:
