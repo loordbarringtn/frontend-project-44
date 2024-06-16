@@ -1,4 +1,7 @@
-// Функция для нахождения всех делителей числа
+import runGame, { getRandomNumber } from '../index.js';
+
+const instructions = 'Find the greatest common divisor of given numbers.';
+
 const getDivisors = (number) => {
   const divisors = [];
   // eslint-disable-next-line no-plusplus
@@ -28,4 +31,13 @@ const getGCD = (a, b) => {
   return greatestCommonDivisor;
 };
 
-export default getGCD;
+const getQuestionAndAnswer = () => {
+  const randomNumber1 = getRandomNumber(100);
+  const randomNumber2 = getRandomNumber(100);
+  const question = `${randomNumber1} ${randomNumber2}`;
+  const correctAnswer = String(getGCD(randomNumber1, randomNumber2));
+
+  return [question, correctAnswer];
+};
+
+export default () => runGame(instructions, getQuestionAndAnswer);
