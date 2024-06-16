@@ -1,15 +1,14 @@
-// eslint-disable-next-line consistent-return
-const isNumberPrime = (number) => {
+const isNumberIsPrime = (number) => {
   if (number <= 1) {
-    return 'no';
+    return false;
   }
   // eslint-disable-next-line no-plusplus
   for (let i = 2, max = Math.sqrt(number); i <= max; i++) {
     if (number % i === 0) {
-      return 'no';
+      return false;
     }
   }
-  return 'yes';
+  return true;
 };
 
-export default isNumberPrime;
+export default isNumberIsPrime;

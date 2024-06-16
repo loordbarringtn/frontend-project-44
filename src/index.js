@@ -1,10 +1,10 @@
 import readlineSync from 'readline-sync';
 import askAndGreetUser from './cli.js';
-import determineEvenOrNot from './games/brainEvenLogic.js';
+import isNumberIsEven from './games/brainEvenLogic.js';
 import getRandomOperator from './games/brainCalcLogic.js';
 import getGCD from './games/brainGCDLogic.js';
 import makeArithmeticProgression from './games/brainProgressionLogic.js';
-import isNumberPrime from './games/brainPrimeLogic.js';
+import isNumberIsPrime from './games/brainPrimeLogic.js';
 
 const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -62,7 +62,7 @@ const generateQuestionAndAnswer = (gameName) => {
     case 'brain-even':
       number = getRandomNumber(100);
       question = number;
-      correctAnswer = determineEvenOrNot(number);
+      correctAnswer = isNumberIsEven(number) ? 'yes' : 'no';
       break;
     case 'brain-gcd':
       randomNumber1 = getRandomNumber(100);
@@ -82,7 +82,7 @@ const generateQuestionAndAnswer = (gameName) => {
       break;
     case 'brain-prime':
       question = getRandomNumber(100);
-      correctAnswer = isNumberPrime(question);
+      correctAnswer = isNumberIsPrime(question) ? 'yes' : 'no';
       break;
     default:
       throw new Error(`Unknown game: ${gameName}`);

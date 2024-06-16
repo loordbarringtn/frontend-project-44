@@ -1,8 +1,3 @@
-const determineEvenOrNot = (number) => {
-  if (number % 2 === 0) {
-    return 'yes';
-  }
-  return 'no';
-};
+const isNumberIsEven = (number) => number % 2 === 0;
 
-export default determineEvenOrNot;
+export default isNumberIsEven;
