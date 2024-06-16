@@ -1,5 +1,4 @@
 import readlineSync from 'readline-sync';
-import askAndGreetUser from './cli.js';
 import isNumberIsEven from './games/brainEvenLogic.js';
 import getRandomOperator from './games/brainCalcLogic.js';
 import getGCD from './games/brainGCDLogic.js';
@@ -93,10 +92,11 @@ const generateQuestionAndAnswer = (gameName) => {
 
 const runGame = (gameName) => {
   let attemptsNumber = 3;
+  console.log('Welcome to the Brain Games!');
+  const userName = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${userName}!`);
 
   const instructions = getGameInstructions(gameName);
-  const name = askAndGreetUser();
-
   console.log(instructions);
 
   while (attemptsNumber > 0) {
@@ -111,11 +111,11 @@ const runGame = (gameName) => {
       attemptsNumber--;
     } else {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${(correctAnswer)}'.`);
-      console.log(`Let's try again, ${name}!`);
+      console.log(`Let's try again, ${userName}!`);
       break;
     }
     if (attemptsNumber === 0) {
-      console.log(`Congratulations, ${name}!`);
+      console.log(`Congratulations, ${userName}!`);
     }
   }
 };
