@@ -21,13 +21,10 @@ const runGame = (instructions, getQuestionAndAnswer) => {
       attemptsNumber -= 1;
     } else {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${(correctAnswer)}'.`);
-      console.log(`Let's try again, ${userName}!`);
-      break;
-    }
-    if (attemptsNumber === 0) {
-      console.log(`Congratulations, ${userName}!`);
+      return console.log(`Let's try again, ${userName}!`);
     }
   }
+  console.log(`Congratulations, ${userName}!`);
 };
 
 export default runGame;
