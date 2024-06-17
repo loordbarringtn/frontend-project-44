@@ -1,4 +1,5 @@
-import runGame, { getRandomNumber } from '../index.js';
+import runGame from '../index.js';
+import getRandomNumber from '../utils.js';
 
 const instructions = 'What number is missing in the progression?';
 const makeArithmeticProgression = (step, membersQuantity) => {

@@ -1,7 +1,6 @@
 import readlineSync from 'readline-sync';
 
-export const getRandomNumber = (max, min = 1) => Math.floor(Math.random() * (max - min + 1)) + min;
-
+// eslint-disable-next-line consistent-return
 const runGame = (instructions, getQuestionAndAnswer) => {
   let attemptsNumber = 3;
   console.log('Welcome to the Brain Games!');
