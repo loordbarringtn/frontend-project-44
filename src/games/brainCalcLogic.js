@@ -9,27 +9,26 @@ const getRandomOperator = () => {
   return operators[randomIndex];
 };
 
-const getQuestionAndAnswer = () => {
-  let correctAnswer = 0;
+const getCalculatedAnswer = (number1, number2, operator) => {
+  switch (operator) {
+    case '+':
+      return number1 + number2;
+    case '-':
+      return number1 - number2;
+    case '*':
+      return number1 * number2;
+    default:
+      throw new Error(`Unknown operator: ${operator}`);
+  }
+};
 
+const getQuestionAndAnswer = () => {
   const randomNumber1 = getRandomNumber(100);
   const randomNumber2 = getRandomNumber(100);
   const operator = getRandomOperator();
   const question = `${randomNumber1} ${operator} ${randomNumber2}`;
 
-  switch (operator) {
-    case '+':
-      correctAnswer = String(randomNumber1 + randomNumber2);
-      break;
-    case '-':
-      correctAnswer = String(randomNumber1 - randomNumber2);
-      break;
-    case '*':
-      correctAnswer = String(randomNumber1 * randomNumber2);
-      break;
-    default:
-      throw new Error(`Unknown operator: ${operator}`);
-  }
+  const correctAnswer = String(getCalculatedAnswer(randomNumber1, randomNumber2, operator));
 
   return [question, correctAnswer];
 };
